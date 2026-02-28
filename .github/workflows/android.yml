@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: simblast-release-apk
-        path: **/build/outputs/**/*.apk
+        path: "presentation/build/outputs/apk/withAnalyticsRelease/*.apk"
