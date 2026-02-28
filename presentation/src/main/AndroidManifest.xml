@@ -18,7 +18,7 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.moez.QKSMS">
+    package="com.simblast.app">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -117,6 +117,7 @@
         <activity android:name=".feature.scheduled.ScheduledActivity" />
         <activity android:name=".feature.backup.BackupActivity" />
         <activity android:name=".feature.contacts.ContactsActivity" />
+        <activity android:name=".feature.masssend.MassSendActivity" />
 
         <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
@@ -148,10 +149,10 @@
         <receiver android:name=".receiver.SmsDeliveredReceiver" />
         <receiver
             android:name=".receiver.MmsSentReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_SENT" />
+            android:taskAffinity="com.simblast.app.MMS_SENT" />
         <receiver
             android:name=".receiver.MmsUpdatedReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_UPDATED" />
+            android:taskAffinity="com.simblast.app.MMS_UPDATED" />
         <receiver
             android:name=".receiver.MmsReceivedReceiver"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED" />
@@ -170,7 +171,7 @@
         <receiver android:name=".feature.widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.moez.QKSMS.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
+                <action android:name="com.simblast.app.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
             </intent-filter>
 
             <meta-data

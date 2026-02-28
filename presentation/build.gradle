@@ -28,15 +28,20 @@ android {
     flavorDimensions "analytics"
 
     defaultConfig {
-        applicationId "com.moez.QKSMS"
+        applicationId "com.simblast.app"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2218
         versionName "3.9.4"
-        setProperty("archivesBaseName", "QKSMS-v${versionName}")
+        setProperty("archivesBaseName", "Simblast-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        setProperty("archivesBaseName", "QKSMS-v${versionName}")
+        setProperty("archivesBaseName", "Simblast-v${versionName}")
+
+        // only build ARM64 variant
+        ndk {
+            abiFilters "arm64-v8a"
+        }
     }
 
     signingConfigs {
@@ -101,6 +106,7 @@ dependencies {
     implementation "androidx.emoji:emoji-appcompat:$androidx_emoji_version"
     implementation "androidx.viewpager2:viewpager2:$androidx_viewpager_version"
     implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.compose.material3:material3:1.0.0"
 
     // conductor
     implementation "com.bluelinelabs:conductor:$conductor_version"
