@@ -2,39 +2,37 @@ name: Android CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build Release APK
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Check out code
+      uses: actions/checkout@v2
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        java-version: '11'
 
-    - name: Install Android SDK
-      uses: android-actions/setup-android@v2
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Cache Gradle files
+      uses: actions/cache@v2
       with:
-        api-level: 29
-        build-tools: 29.0.3
-        ndk: "21.4.7075529"
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
-
-    - name: Build release APK
-      env:
-        CI: true
-      run: ./gradlew assembleRelease --warning-mode=all
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: simblast-release-apk
-        path: "presentation/build/outputs/apk/withAnalyticsRelease/*.apk"
+    - name: Cleanup
+      run: |
+        echo 'Cleaning up...'
+        ./gradlew clean
